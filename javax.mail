@@ -1,0 +1,26 @@
+Statement 是 Java 执行数据库操作的一个重要方法，用于在已经建立数据库连接的基础上，向数据库发送要执行的SQL语句。Statement对象，用于执行不带参数的简单SQL语句。
+何谓getDefaultInstance？ 
+从处理流程中可以看出，首先是从缓存中查找是否有properties存在 
+如果存在，则加载默认的properties 
+如果不存在才加载用户自己定义的properties， 
+所以当一个应用为每个用户独立创建properties的时候，还是应该调用getInstance， 
+除非你希望有一个默认的properties让用户使用
+修改Session.getDefaultInstance(props, authentic);为Session.getInstance(props, authentic);后,可以正确发送修改帐号,密码等资料后的邮件.OK
+
+因为，getDefaultInstance是真正单例模式，而且，里面的username和password属性是final型的，无法更改。所以，你会发现两封email都是由1@a.com发出来的。所以这个时候你要使用javax.mail.Session.getInstance()方法来创建session对象。
+
+
+javax.mail.Internet.MimeMultpart
+   
+   一般保存电子邮件内容的容器是Multipart抽象类，它定义了增加和删除及获得电子邮件不同部分内容的方法。由于Multipart是抽象类，我们 必须为它使用一个具体的子类，JavaMail API提供javax.mail.Internet.MimeMultpart类来使用MimeMessage对象。
+，姑且认为是HashMap。<Entry<String,String>>
+
+ javax.mail.Internet.MimeBodyPart类
+   
+   MimeBodyPart是BodyPart具体用于mimeMessage的一个子类。
+   
+   MimeBodyPart对象代表一个MimeMessage对象内容的一部分。每个MimeBodyPart被认为有两部分：
+   
+   ⊙一个MIME类型
+   
+   ⊙匹配这个类型的内容
