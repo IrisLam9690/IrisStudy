@@ -1,0 +1,12 @@
+Tomcat 服务器是一个免费的开放源代码的Web 应用服务器，属于轻量级应用服务器，
+在中小型系统和并发访问用户不是很多的场合下被普遍使用，是开发和调试JSP 程序的首选。
+Tomcat 实际上运行JSP 页面和Servlet。另外，Tomcat和IIS等Web服务器一样，具有处理HTML页面的功能，
+另外它还是一个Servlet和JSP容器，独立的Servlet容器是Tomcat的默认模式。
+布署项目到tomcat上，就可以访问项目的页面，就可以通过外部访问。
+要在APPACHE下运行JSP,最好的方案就是选择TOMCAT,免费，集成度好。
+缺点是界面不直观，对于那些使用Apache的站点管理员来说，自然是小菜一碟。
+
+StaticFields.ROOT_PATH + "/student/Register.do"
+FilterConfig
+StaticFields.ROOT_PATH + "/"
+sendRedirect
