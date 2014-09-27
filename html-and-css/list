@@ -1,0 +1,85 @@
+<html>
+<head>
+	 <meta charset="utf-8">
+   <link rel="stylesheet" type="text/css" href="style.css">
+</head> 
+<body>
+  <ul><a href="list.html">套 餐 推 荐</a></ul>
+  <li class="choose" width="10%">
+    <div id="tag1">主食</div>
+    <div><button class="selectbutton" onclick="javascript:select('主食','米饭')">米饭</button></div>
+    <div><button class="selectbutton" onclick="javascript:select('主食','粥')">粥</button></div>
+  </li>
+  <li class="choose" width="10%">
+    <div>荤食</div>
+    <div><button class="selectbutton" onclick="javascript:select('荤食','猪肉')">猪肉</button></div>
+    <div><button class="selectbutton" onclick="javascript:select('荤食','牛肉')">牛肉</button></div>
+  </li>
+  <li class="choose" width="10%">
+    <div>口味</div>
+    <div><button class="selectbutton" onclick="javascript:select('口味','微辣')">微辣</button></div>
+    <div><button class="selectbutton" onclick="javascript:select('口味','清淡')">清淡</button></div>
+  </li>
+  <img height="6%" width="55%" margin="0px" src="Image/b2.jpg"/>
+  <div class="container">
+    <div class="write"></div>
+  </div>
+  <script src="jquery.js"></script>
+  <script type="text/javascript">   
+    $(document).ready(function() {
+    	select('all','all');
+   })
+    function select(l,s){
+    //  alert(s);
+     $.ajax({
+        type: "POST",
+        url: "out.php",
+        dataType: "json",
+        mode: "block",
+        timeout: 5000,
+        beforeSend: function() {
+     	    $('.write').html('loading...');
+        },
+        success: function(data) { 
+          var out="";          	
+          switch(l){
+            case '主食':
+                $.each(data, function(index, item) { 
+                if (item.主食标签==s) {
+                 out+="<li class='menu'><a href='detail.html?id="+item.编号+"'><div><img src='"+item.图片+"'></div><div><b>"+item.套餐+"</b></div><div><font size=2 color=gray><i>“"+item.主食+"+"+item.素食+"+"+item.荤食+"+"+item.汤羹+"+"+item.饮品甜品+"”</i></div><br><div>"+item.风格+"</div><div>"+item.口味+"</div></a></li>";
+                 }
+                else
+                $('.write').html('~~~~(>_<)~~~~再怎么找也找不到啦~~~');  
+              });break;
+            case '荤食':
+                $.each(data, function(index, item) { 
+                if (item.荤食标签==s) {
+                 out+="<li class='menu'><a href='detail.html?id="+item.编号+"'><div><img src='"+item.图片+"'></div><div><b>"+item.套餐+"</b></div><div><font size=2 color=gray><i>“"+item.主食+"+"+item.素食+"+"+item.荤食+"+"+item.汤羹+"+"+item.饮品甜品+"”</i></font></div><br><div>"+item.风格+"</div><div>"+item.口味+"</div></a></li>";
+                 }
+                else
+                $('.write').html('~~~~(>_<)~~~~再怎么找也找不到啦~~~');  
+              });break;
+            case '口味':
+                $.each(data, function(index, item) { 
+                if (item.口味==s) {
+                 out+="<li class='menu'><a href='detail.html?id="+item.编号+"'><div><img src='"+item.图片+"'></div><div><b>"+item.套餐+"</b></div><div><font size=2 color=gray><i>“"+item.主食+"+"+item.素食+"+"+item.荤食+"+"+item.汤羹+"+"+item.饮品甜品+"”</i></font></div><br><div>"+item.风格+"</div><div>"+item.口味+"</div></a></li>";
+                 }
+                else
+                $('.write').html('~~~~(>_<)~~~~再怎么找也找不到啦~~~');  
+              });break;
+            case 'all':
+                $.each(data, function(index, item) {
+                 out+="<li class='menu'><a href='detail.html?id="+item.编号+"'><div><img src='"+item.图片+"'></div><div><b>"+item.套餐+"</b></div><div><font size=2 color=gray><i>“"+item.主食+"+"+item.素食+"+"+item.荤食+"+"+item.汤羹+"+"+item.饮品甜品+"”</i></font></div><br><div>"+item.风格+"</div><div>"+item.口味+"</div></a></li>";
+               });break;
+          }
+          $('.write').html(out);
+        },
+        error: function() {
+        	alert('与php交互失败');
+        }
+      });
+    }
+  </script>
+</body>
+
+</html>
