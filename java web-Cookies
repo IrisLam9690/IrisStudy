@@ -1,0 +1,38 @@
+Cookies就是服务器暂时存放在你的电脑里的资料（.txt格式的文本文件），
+好让服务器用来辨认你的计算机。
+当你在浏览网站的时候，Web服务器会先送一小小资料放在你的计算机上，Cookies 会帮你在网站上所打的文字或是一些选择都记录下来。
+当下次你再访问同一个网站，Web服务器会先看看有没有它上次留下的Cookies资料，有的话，就会依据Cookie里的内容来判断使用者，
+送出特定的网页内容给你。
+服务器可以利用Cookies包含信息的任意性来筛选并经常性维护这些信息，以判断在HTTP传输中的状态。
+Cookies最典型的应用是判定注册用户是否已经登录网站，用户可能会得到提示，
+是否在下一次进入此网站时保留用户信息以便简化登录手续，这些都是Cookies的功用。
+另一个重要应用场合是“购物车”之类处理。用户可能会在一段时间内在同一家网站的不同页面中选择不同的商品，
+这些信息都会写入Cookies，以便在最后付款时提取信息。
+
+先创建一个Cookie对象（Object），然后利用控制函数对Cookie进行赋值、读取、写入等操作。
+JSP中使用cookie来管理用户的状态
+cookie也算http消息报头的一部分，它的作用有以下方面：
+一 记录访客的某些信息。例如可以利用cookie记录用户光临的网页次数，或者访客曾经输入过的信息。
+某些网站可以自动记录用户上次登录的用户名，用的就是cookie。
+二 页面之间传递变量。浏览器并不会保存当前页面上任何变量的信息，当页面被关闭时，页面上的所有变量信息将随之消失。
+
+
+Cookie cookie=new Cookie(cookiename,"1");
+setMaxAge(10*60);//设置cookie存活期
+addCookie(cookie);//将cookie写入客户端
+
+在jsp中处理cookie数据的常用方法：
+getDomain（）；返回cookie的域名.
+getMaxAge（）；返回cookie的存活时间
+getName（）；返回cookie的名字
+getPath（）；返回cookie适用的路径
+getSecure（）；如果浏览器通过安全协议发送Cookie将返回true值，
+如果浏览器使用标准协议刚返回false值
+getValue（）；返回cookie的值
+getVersion（）；返回cookie所遵从的协议版本setComment(String purpose）；
+设置cookie的注释
+setPath(String url）；设置Cookie的适用路径
+setSecure(Boolean flag）；设置浏览器是否仅仅使用安全协议来发送cookie，
+例如使用Https或ssl
+setValue(String newvalue);cookie创建后设置一个新的值
+setVersion(int v）；设置cookie所遵从的协议版本.
