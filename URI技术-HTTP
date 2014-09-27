@@ -1,0 +1,5 @@
+request.getParameter取得Web客户端到web服务端的http请求数据(get/post)，只能是string类型的，而且HttpServletRequest没有对应的setParameter()方法。
+当两个web组件为链接关系时，被链接组件通过getParameter来获取请求参数。
+当两个web组件为链接关系时，被链接组件通过getParameter来获取请求参数。
+request.getAttribute():当两个web组件为转发关系时，通过getAttribute()和setAttribute()来共享request范围内的数据
+request.setAttribute是服务器把这个对象放在该页面对应的一块内存中，当发生服务器重定向时，会把这块内存拷到另一页面对应的内存中，这样getAttribute就可以取到值，session也一样，只是对象在内存的生命周期不一样。
