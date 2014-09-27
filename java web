@@ -1,0 +1,10 @@
+Servlet容器——Tomcat、Jetty等
+Web工程的配置——web.xml
+Servlet的基类——HttpServlet
+doXXX()方法
+请求对象HttpServletRequest、响应对象HttpServletResponse
+请求参数Parameter和请求属性Attribute
+setattribute保存到对象中
+forward和sendRedirect
+客户端Cookie
+服务端Session
