@@ -1,0 +1,22 @@
+List一共有三个实现类ArrayList，LinkedLIst，Vector。其中LinkedList有List所没有的方法用于专门操作表头和表尾元素，
+这也体现了链表的特性。Vector和ArrayList一样，都是通过数组实现的，但是Vector是同步的，而ArrayList不是。
+LinkedList也是不同步的。
+Set的直接子类，常见使用的HashSet，SortedSet（接口），其他的直接子类较少用。TreeSet也是常用的Set的子类，
+但是不是直接子类。因此Set上，有HashSet，SortedSet，TreeSet要掌握。HashSet是基于HashMap实现的。
+TreeSet是利用Comparable接口进行排序得到树结构的Set。SortedSet是接口。
+Map的直接子类是HashMap，Hashtable，SortedMap。HashSet与HashMap都是使用Hash算法进行的数据存储，只是HashSet将数据进行存储，
+而HashMap将键值对进行存储。SortedMap是接口。Hashtable是以键值对进行存储的，他是继承自陈旧的Dictionary类的，是同步的类，
+且键值都不允许出现null，使用Enumeration进行遍历，重要的是Hashtable直接使用对象的hashCode。HashMap是继承自AbstractMap的类，
+是不同步的，键值允许为null，使用Iterator进行遍历，而且重新计算hash值，并且用予代替求模。
+而且应该明白，在Collection Frame中，并不是将集合对象进行存储的，而是将引用进行存储，最后利用引用指向数据。
+同时注意Hash算法其实是为了进行快速存取集合数据而被设计的，Hash算法是会浪费空间资源的。
+
+
+容器类涉及到的知识点：1、集合框架（Collection Frame）是用于表示和操作集合的统一标准体系结构，任何体系框架都包含三部分：
+对外接口，接口实现，对集合运算的算法。同时应该注意集合架构提供两个实用的接口Comparable以及Comparator。同时提供了两个很实用
+的类Collections与Arrays。2、一个类是可排序的，则应该要实现Comparable接口（或者是Comparator接口）。这点在TreeSet上得到使用，
+因为虽然Set是无序的，但是Tree却是有序的因为需要Tree结构，所以就使用了Comparable接口。3、equals（），hashCode（）方法对于
+使用Hash的类特别重要，因为这两个方法是实现Hash的必要方法。equals（）用于比较两个对象是否相等，hashCode（）用于得到存储地址。
+4、Iterator，ListIterator，Enumerattion都是用于遍历的，其中Iterator是从Object继承来的，最原始的类。List是改进版的Iterator，
+可实现前后遍历。Enumeration是从Dictionary那里继承来的，用于对Hashtable进行遍历用的类。5、其实在java的容器体系中还存在扩展的
+包，如Map与List就存在有不同的包对Map及List进行实现，这点是需要注意的，如java.util.Map与javax.swing.text.html.Map
