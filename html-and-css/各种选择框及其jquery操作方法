@@ -1,0 +1,37 @@
+<html>
+<head>
+<meta charset="utf-8">
+
+</head>
+<body>
+<input type="checkbox" name="checkbox" value="check"> 跑步 
+
+
+	<input type="radio" name="asd" value="like"> 喜欢  
+<input type="radio" name="asd" value="dislike"> 不喜欢  
+ 
+
+<div>sex
+<select class="b">
+  <option value ="man">男</option>
+  <option value ="woman">女</option>
+</select>
+</div>
+
+<button>CLICK</button>
+<div id="write"></div>
+<script src="jquery.js"></script>
+<script type="text/javascript">
+$(document).ready(function() {
+$('button').click(function(event) {
+	alert($("[name='asd']:checked").val());//单选框 未选择时默认为undefined
+	alert($('.b').val());//下拉框
+	alert($("[name='checkbox']:checked").val());//复选框  未选择时默认为undefined
+});
+
+})
+
+</script>
+</body>
+
+</html>
