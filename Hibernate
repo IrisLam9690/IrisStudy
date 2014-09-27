@@ -1,0 +1,42 @@
+Hibernate的缓存包括Session的缓存和SessionFactory的缓存，
+其中SessionFactory的缓存又可以分为两类：内置缓存和外置缓存。Session的缓存是内置的，
+不能被卸载，也被称为Hibernate的第一级缓存。SessionFactory的内置缓存和Session的缓存在实现方式上比较相似，
+前者是SessionFactory对象的一些集合属性包含的数据，后者是指Session的一些集合属性包含的数据。
+SessionFactory的内置缓存中存放了映射元数据和预定义SQL语句，映射元数据是映射文件中数据的拷贝，
+而预定义SQL语句是在Hibernate初始化阶段根据映射元数据推导出来，SessionFactory的内置缓存是只读的，
+应用程序不能修改缓存中的映射元数据和预定义SQL语句，因此SessionFactory不需要进行内置缓存与映射文件的同步。
+SessionFactory的外置缓存是一个可配置的插件。在默认情况下，SessionFactory不会启用这个插件。外置缓存的数据是数据库数据的拷贝
+，外置缓存的介质可以是内存或者硬盘。SessionFactory的外置缓存也被称为Hibernate的第二级缓存。
+Hibernate的这两级缓存都位于持久化层，存放的都是数据库数据的拷贝，为了理解二者的区别，
+需要深入理解持久化层的缓存的两个特性：缓存的范围和缓存的并发访问策略。
+
+
+
+A、实体对象的延迟加载：
+ 如果想对实体对象使用延迟加载，必须要在实体的映射配置文件中进行相应的配置，如下所示：
+<hibernate-mapping>
+ <class name=”com.neusoft.entity.User” table=”user” lazy=”true”>
+   ……
+ </class>
+</hibernate-mapping>
+通过将class的lazy属性设置为true，来开启实体的延迟加载特性。如果我们运行下面的代码：
+User user=(User)session.load(User.class,”1”);（1）
+System.out.println(user.getName());（2）
+
+这样，通过一个中间代理对象，Hibernate实现了实体的延迟加载，只有当用户真正发起获得实体对象属性的动作时，
+才真正会发起数据库查询操作。所以实体的延迟加载是用通过中间代理类完成的，所以只有session.load()方法才会利用实体延迟加载，
+因为只有session.load()方法才会返回实体类的代理类对象。
+B、集合类型的延迟加载：
+在Hibernate的延迟加载机制中，针对集合类型的应用，意义是最为重大的，因为这有可能使性能得到大幅度的提高，
+为此Hibernate进行了大量的努力，其中包括对JDK Collection的独立实现，我们在一对多关联中，定义的用来容纳关联对象的Set集合，
+并不是java.util.Set类型或其子类型，而是net.sf.hibernate.collection.Set类型，通过使用自定义集合类的实现，
+Hibernate实现了集合类型的延迟加载。为了对集合类型使用延迟加载，我们必须如下配置我们的实体类的关于关联的部分：
+
+Hibernate的二级缓存策略，是针对于ID查询的缓存策略，对于条件查询则毫无作用。为此，Hibernate提供了针对条件查询的Query缓存。
+
+hibernate的延迟加载，就是在关联映射的时候，对于被关联的对象或集合，不当时查询数据库，
+而是该集合或用户被用到的时候才去查。
+原理就是使用动态代理的方式，把持久化类替换成代理类（对于单个对象和集合，均有对应的代理类），
+在代理类中实现这样的功能，即当第一次访问被代理对象的非id字段时，查询数据库。
+至于应用范围，默认情况下，hibernate对于集合都是用延迟select抓取，对返回单值的关联使用延迟代理抓取。
+
