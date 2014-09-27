@@ -1,0 +1,56 @@
+<html>
+<head>
+	 <meta charset="utf-8">
+   <link rel="stylesheet" type="text/css" href="style3.css">
+</head>
+<body>
+  <ul id='title'></ul>
+  <div class="close">
+    <a href="list.html"><b>
+      Close
+    </b></a>
+  </div>
+  <div class="write"></div>
+  <script src="jquery.js"></script>
+  <script type="text/javascript">
+    var b;
+    var a;
+    $(document).ready(function() {
+      var url = window.location.search;
+      if (url.indexOf("?") != -1) {
+      var str = url.substr(1)
+      strs = str.split("&");
+      a=strs[0].split("=")[1];
+      }
+      connect();
+    })
+    function connect(){
+     $.ajax({
+        type: "POST",
+        url: "out.php",
+        dataType: "json",
+        mode: "block",
+        timeout: 5000,
+        beforeSend: function() {
+        $('.write').html('loading...');
+        },
+        success: function(data) {          
+          var out="";
+          $.each(data, function(index, item) {
+            if (item.编号==a) {
+              b = item.套餐;
+              $('#title').append(b);
+              out+="<style type='text/css'>body{background-image:url(Image/p"+(a*1+10)+".jpg);background-size: 100%}</style><li class='menu'><div><b>"+item.套餐+"</b></div><div fontsize=20px style='color:gray'><i> \" "+item.主食+"+"+item.素食+"+"+item.荤食+"+"+item.汤羹+"+"+item.饮品甜品+" \" </i></div></li>";
+            };
+          });
+          $('.write').html(out);
+        },
+        error: function() {
+          alert('与php交互失败');
+        }
+     });
+  }
+  </script>
+</body>
+
+</html>
