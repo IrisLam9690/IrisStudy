@@ -1,0 +1,25 @@
+<?php
+
+@include 'init.php';
+$user=$_POST['user'];
+$password=$_POST['password'];
+
+$con=mysql_connect(SAE_MYSQL_HOST_M.':'.SAE_MYSQL_PORT,SAE_MYSQL_USER,SAE_MYSQL_PASS);
+mysql_query("set names 'utf8'",$con);
+if (!$con) { die('Could not connect: ' . mysql_error()); }
+mysql_select_db(SAE_MYSQL_DB,$con);
+
+$sql="SELECT * FROM admin WHERE user='$user' and password='$password'";
+		$res  = mysql_query($sql);
+		$rows = mysql_num_rows($res);
+		if($rows>0){
+			//登陆成功
+			$arr = array(0 => array('status' => '200');
+					}else{
+						//登陆失败
+			$arr = array(0 => array('status' => '0');
+					}
+echo json_encode($arr);
+mysql_close($con);
+
+?>
