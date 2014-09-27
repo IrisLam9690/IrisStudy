@@ -1,5 +1,23 @@
-request.getParameter取得Web客户端到web服务端的http请求数据(get/post)，只能是string类型的，而且HttpServletRequest没有对应的setParameter()方法。
+
+实际过程中我们编写的Servlet类都继承于HttpServlet
+httpservlet类是servlet接口的实现类
+sendRedirect可以用在httpservletresponse的public void sendRedirect（String location)中为将客户端请求重新定义到新的URL中
+cookie指某些网站为了辨别用户身份、进行session跟踪而储存在用户本地终端上的数据（通常经过加密）.
+session其实是指一种几个页面之间的共享数据
+
+
+request.getParameter取得Web客户端到web服务端的http请求数据(get/post)，只能是string类型的，
+而且HttpServletRequest没有对应的setParameter()方法。
 当两个web组件为链接关系时，被链接组件通过getParameter来获取请求参数。
 当两个web组件为链接关系时，被链接组件通过getParameter来获取请求参数。
 request.getAttribute():当两个web组件为转发关系时，通过getAttribute()和setAttribute()来共享request范围内的数据
-request.setAttribute是服务器把这个对象放在该页面对应的一块内存中，当发生服务器重定向时，会把这块内存拷到另一页面对应的内存中，这样getAttribute就可以取到值，session也一样，只是对象在内存的生命周期不一样。
+request.setAttribute是服务器把这个对象放在该页面对应的一块内存中，当发生服务器重定向时，
+会把这块内存拷到另一页面对应的内存中，这样getAttribute就可以取到值，session也一样，只是对象在内存的生命周期不一样。
+
+request.getAttribute()方法返回request范围内存在的对象，request.getParameter()获取http请求提交过来的数据。
+一般的Web应用，基本上是post方式的传递，用getParameter取值。对于自己控制的，
+可以通过request.setAttribute和getAttribute实现值的传递。
+对于应用struts的，getAttribute用的多一点，其他的基本用getParameter，一个可以传对象，一个只能传字符串。
+
+forward（）用于把请求转发到服务器上的另一个资源
+利用requestDispatcher.forward（）
